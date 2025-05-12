@@ -22,28 +22,14 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ cdt('libdrm-devel') }}               # [linux]
-    - {{ cdt('libglvnd-glx') }}               # [linux and not x86_64]
-    - {{ cdt('libglvnd-egl') }}               # [linux and not x86_64]
-    - {{ cdt('libice-devel') }}               # [linux]
-    - {{ cdt('libsm-devel') }}                # [linux]
-    - {{ cdt('libx11-devel') }}               # [linux]
-    - {{ cdt('libxau-devel') }}               # [linux]
-    - {{ cdt('mesa-libgl-devel') }}           # [linux]
-    - {{ cdt('mesa-libgbm') }}                # [linux]
-    - {{ cdt('mesa-libegl-devel') }}          # [linux]
-    - {{ cdt('mesa-dri-drivers') }}           # [linux]
-    - {{ cdt('xcb-util-devel') }}             # [linux]
-    - {{ cdt('xcb-util-image-devel') }}       # [linux]
-    - {{ cdt('xcb-util-keysyms-devel') }}     # [linux]
-    - {{ cdt('xcb-util-renderutil-devel') }}  # [linux]
-    - {{ cdt('xcb-util-wm-devel') }}          # [linux]
-    - {{ cdt('xorg-x11-proto-devel') }}       # [linux]
-    - {{ cdt('libselinux') }}                 # [linux]
-    - {{ cdt('libxext') }}                    # [linux]
-    - {{ cdt('libxdamage') }}                 # [linux]
-    - {{ cdt('libxfixes') }}                  # [linux]
-    - {{ cdt('libxxf86vm') }}                 # [linux]
+    # TODO: map CDT libdrm-devel to new X11 package
+    # - { cdt('libdrm-devel') }
+    # TODO: map CDT mesa-libgbm to new X11 package
+    # - { cdt('mesa-libgbm') }
+    # TODO: map CDT mesa-libegl-devel to new X11 package
+    # - { cdt('mesa-libegl-devel') }
+    # TODO: map CDT libselinux to new X11 package
+    # - { cdt('libselinux') }
     - pkg-config  # [unix]
     - bison       # [linux]
     - flex        # [linux]
@@ -60,6 +46,42 @@ requirements:
     - qtbase {{ version }}
     - qtdeclarative {{ version }}
 
+    - libglx
+    - libegl
+    - xorg-libice
+    - xorg-libsm
+    - xorg-libx11
+    - xorg-libxau
+    - libgl-devel
+    - mesa-dri-drivers
+    - xcb-util
+    - xcb-util-image
+    - xcb-util-keysyms
+    - xcb-util-renderutil
+    - xcb-util-wm
+    - xorg-xproto
+    - xorg-libxext
+    - xorg-libxdamage
+    - xorg-libxfixes
+    - xorg-libxxf86vm
+    - libglx
+    - libegl
+    - xorg-libice
+    - xorg-libsm
+    - xorg-libx11
+    - xorg-libxau
+    - libgl-devel
+    - mesa-dri-drivers
+    - xcb-util
+    - xcb-util-image
+    - xcb-util-keysyms
+    - xcb-util-renderutil
+    - xcb-util-wm
+    - xorg-xproto
+    - xorg-libxext
+    - xorg-libxdamage
+    - xorg-libxfixes
+    - xorg-libxxf86vm
   run_constrained:
     - qt-main >={{ version }},<7
     - qt >={{ version }},<7
@@ -69,28 +91,14 @@ test:
     - {{ compiler('cxx') }}
     - cmake
     - ninja
-    - {{ cdt('libdrm-devel') }}               # [linux]
-    - {{ cdt('libglvnd-glx') }}               # [linux and not x86_64]
-    - {{ cdt('libglvnd-egl') }}               # [linux and not x86_64]
-    - {{ cdt('libice-devel') }}               # [linux]
-    - {{ cdt('libsm-devel') }}                # [linux]
-    - {{ cdt('libx11-devel') }}               # [linux]
-    - {{ cdt('libxau-devel') }}               # [linux]
-    - {{ cdt('mesa-libgl-devel') }}           # [linux]
-    - {{ cdt('mesa-libgbm') }}                # [linux]
-    - {{ cdt('mesa-libegl-devel') }}          # [linux]
-    - {{ cdt('mesa-dri-drivers') }}           # [linux]
-    - {{ cdt('xcb-util-devel') }}             # [linux]
-    - {{ cdt('xcb-util-image-devel') }}       # [linux]
-    - {{ cdt('xcb-util-keysyms-devel') }}     # [linux]
-    - {{ cdt('xcb-util-renderutil-devel') }}  # [linux]
-    - {{ cdt('xcb-util-wm-devel') }}          # [linux]
-    - {{ cdt('xorg-x11-proto-devel') }}       # [linux]
-    - {{ cdt('libselinux') }}                 # [linux]
-    - {{ cdt('libxext') }}                    # [linux]
-    - {{ cdt('libxdamage') }}                 # [linux]
-    - {{ cdt('libxfixes') }}                  # [linux]
-    - {{ cdt('libxxf86vm') }}                 # [linux]
+    # TODO: map CDT libdrm-devel to new X11 package
+    # - { cdt('libdrm-devel') }
+    # TODO: map CDT mesa-libgbm to new X11 package
+    # - { cdt('mesa-libgbm') }
+    # TODO: map CDT mesa-libegl-devel to new X11 package
+    # - { cdt('mesa-libegl-devel') }
+    # TODO: map CDT libselinux to new X11 package
+    # - { cdt('libselinux') }
   files:
     - run_qt_test.sh    # [unix]
     - run_qt_test.bat   # [win]
