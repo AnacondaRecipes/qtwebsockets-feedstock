@@ -6,13 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://download.qt.io/official_releases/qt/{{ version.rpartition('.')[0] }}/{{ version }}/submodules/{{ name }}-everywhere-src-{{ version }}.tar.xz
+  - url: https://download.qt.io/archive/qt/{{ version.rpartition('.')[0] }}/{{ version }}/submodules/{{ name }}-everywhere-src-{{ version }}.tar.xz
     sha256: ba03007db7ee68a5bc3e3bd1d71e11f3e1f84e470bcb8c54cd7c01bbe1c5990e
     folder: {{ name }}
 
 build:
-  number: 0
-  skip: True  # [ppc64le or s390x or (osx and x86_64)]
+  number: 1
+  skip: True  # [osx and x86_64]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
   ignore_run_exports:
@@ -22,14 +22,6 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    # TODO: map CDT libdrm-devel to new X11 package
-    # - { cdt('libdrm-devel') }
-    # TODO: map CDT mesa-libgbm to new X11 package
-    # - { cdt('mesa-libgbm') }
-    # TODO: map CDT mesa-libegl-devel to new X11 package
-    # - { cdt('mesa-libegl-devel') }
-    # TODO: map CDT libselinux to new X11 package
-    # - { cdt('libselinux') }
     - pkg-config  # [unix]
     - bison       # [linux]
     - flex        # [linux]
@@ -45,43 +37,13 @@ requirements:
   host:
     - qtbase {{ version }}
     - qtdeclarative {{ version }}
-
-    - libglx
-    - libegl
-    - xorg-libice
-    - xorg-libsm
-    - xorg-libx11
-    - xorg-libxau
-    - libgl-devel
-    - mesa-dri-drivers
-    - xcb-util
-    - xcb-util-image
-    - xcb-util-keysyms
-    - xcb-util-renderutil
-    - xcb-util-wm
-    - xorg-xproto
-    - xorg-libxext
-    - xorg-libxdamage
-    - xorg-libxfixes
-    - xorg-libxxf86vm
-    - libglx
-    - libegl
-    - xorg-libice
-    - xorg-libsm
-    - xorg-libx11
-    - xorg-libxau
-    - libgl-devel
-    - mesa-dri-drivers
-    - xcb-util
-    - xcb-util-image
-    - xcb-util-keysyms
-    - xcb-util-renderutil
-    - xcb-util-wm
-    - xorg-xproto
-    - xorg-libxext
-    - xorg-libxdamage
-    - xorg-libxfixes
-    - xorg-libxxf86vm
+    # X11 dependencies
+    - libgl  # [linux]
+    - libgl-devel  # [linux]
+    - mesa-libgl-devel  # [linux]
+    - mesalib  # [linux]
+    - libegl  # [linux]
+    - libegl-devel  # [linux]
   run_constrained:
     - qt-main >={{ version }},<7
     - qt >={{ version }},<7
@@ -91,14 +53,13 @@ test:
     - {{ compiler('cxx') }}
     - cmake
     - ninja
-    # TODO: map CDT libdrm-devel to new X11 package
-    # - { cdt('libdrm-devel') }
-    # TODO: map CDT mesa-libgbm to new X11 package
-    # - { cdt('mesa-libgbm') }
-    # TODO: map CDT mesa-libegl-devel to new X11 package
-    # - { cdt('mesa-libegl-devel') }
-    # TODO: map CDT libselinux to new X11 package
-    # - { cdt('libselinux') }
+    # X11 dependencies
+    - libgl  # [linux]
+    - libgl-devel  # [linux]
+    - mesa-libgl-devel  # [linux]
+    - mesalib  # [linux]
+    - libegl  # [linux]
+    - libegl-devel  # [linux]
   files:
     - run_qt_test.sh    # [unix]
     - run_qt_test.bat   # [win]
