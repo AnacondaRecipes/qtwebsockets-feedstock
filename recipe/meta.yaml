@@ -38,11 +38,7 @@ requirements:
     - qtbase {{ version }}
     - qtdeclarative {{ version }}
     # X11 dependencies
-    - libgl  # [linux]
     - libgl-devel  # [linux]
-    - mesa-libgl-devel  # [linux]
-    - mesalib  # [linux]
-    - libegl  # [linux]
     - libegl-devel  # [linux]
   run_constrained:
     - qt-main >={{ version }},<7
@@ -54,11 +50,7 @@ test:
     - cmake
     - ninja
     # X11 dependencies
-    - libgl  # [linux]
     - libgl-devel  # [linux]
-    - mesa-libgl-devel  # [linux]
-    - mesalib  # [linux]
-    - libegl  # [linux]
     - libegl-devel  # [linux]
   files:
     - run_qt_test.sh    # [unix]
