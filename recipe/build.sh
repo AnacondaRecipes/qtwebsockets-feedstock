@@ -2,9 +2,16 @@
 
 set -ex
 
-export LD_LIBRARY_PATH="${BUILD_PREFIX}/${HOST}/sysroot/usr/lib64:${BUILD_PREFIX}/${HOST}/sysroot/usr/lib:${LD_LIBRARY_PATH}"
+if [[ "${target_platform}" == osx-* ]]; then
+  CMAKE_ARGS="
+    ${CMAKE_ARGS}
+    -DQT_FORCE_WARN_APPLE_SDK_AND_XCODE_CHECK=ON
+    -DQT_APPLE_SDK_PATH=${CONDA_BUILD_SYSROOT}
+    -DQT_MAC_SDK_VERSION=${OSX_SDK_VER}
+  "
+fi
 
-cmake -S"${SRC_DIR}/${PKG_NAME}" -Bbuild -GNinja ${CMAKE_ARGS} \
+cmake --log-level STATUS -S"${SRC_DIR}/${PKG_NAME}" -Bbuild -GNinja ${CMAKE_ARGS} \
   -DCMAKE_PREFIX_PATH=${PREFIX} \
   -DCMAKE_INSTALL_PREFIX=${PREFIX} \
   -DCMAKE_INSTALL_RPATH=${PREFIX}/lib \
