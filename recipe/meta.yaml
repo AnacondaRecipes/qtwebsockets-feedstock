@@ -1,40 +1,37 @@
 {% set name = "qtwebsockets" %}
-{% set version = "6.7.3" %}
+{% set version = "6.9.1" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  - url: https://download.qt.io/archive/qt/{{ version.rpartition('.')[0] }}/{{ version }}/submodules/{{ name }}-everywhere-src-{{ version }}.tar.xz
-    sha256: ba03007db7ee68a5bc3e3bd1d71e11f3e1f84e470bcb8c54cd7c01bbe1c5990e
+  - url: https://download.qt.io/official_releases/qt/{{ version.rpartition('.')[0] }}/{{ version }}/submodules/{{ name }}-everywhere-src-{{ version }}.tar.xz
+    sha256: 98be8c863b7f02cc98eedc0b6eac07544c10a9d2fa11c685fd61f6b243f748f5
     folder: {{ name }}
 
 build:
-  number: 1
+  number: 0
   skip: True  # [osx and x86_64]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
-  ignore_run_exports:
-    - qtshadertools
 
 requirements:
   build:
     - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - pkg-config  # [unix]
-    - bison       # [linux]
-    - flex        # [linux]
-    - gperf       # [linux]
-    - jom         # [win]
-    - m2-bison    # [win]
-    - m2-flex     # [win]
-    - m2-gperf    # [win]
+    - pkg-config     # [unix]
+    - bison          # [linux]
+    - flex           # [linux]
+    - gperf          # [linux]
+    - jom            # [win]
+    - msys2-bison    # [win]
+    - msys2-flex     # [win]
+    - msys2-gperf    # [win]
     - cmake
     - ninja
     - perl
-
   host:
     - qtbase-devel {{ version }}
     - qtdeclarative {{ version }}
@@ -54,8 +51,6 @@ test:
     - test/test_qtwebsockets.cpp
     - test/CMakeLists.txt
   commands:
-    - ./run_qt_test.sh  # [unix]
-    - run_qt_test.bat   # [win]
     {% for each_qt_lib in ["WebSockets"] %}
     - test -d $PREFIX/include/qt6/Qt{{ each_qt_lib }}                           # [unix]
     - test -f $PREFIX/lib/libQt6{{ each_qt_lib }}${SHLIB_EXT}                   # [unix]
@@ -63,6 +58,8 @@ test:
     - if not exist %PREFIX%\\Library\\lib\\Qt6{{ each_qt_lib }}.lib exit 1      # [win]
     - if not exist %PREFIX%\\Library\\bin\\Qt6{{ each_qt_lib }}.dll exit 1      # [win]
     {% endfor %}
+    - ./run_qt_test.sh  # [unix]
+    - run_qt_test.bat   # [win]
 
 about:
   home: https://www.qt.io/
