@@ -11,7 +11,8 @@ source:
     folder: {{ name }}
 
 build:
-  number: 0
+  number: 1
+  # https://doc.qt.io/qt-6/qt-releases.html#binary-compatibility
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
@@ -34,9 +35,6 @@ requirements:
   host:
     - qtbase-devel {{ version }}
     - qtdeclarative {{ version }}
-  run_constrained:
-    - qt-main >={{ version }},<7
-    - qt >={{ version }},<7
 
 test:
   requires:
