@@ -1,5 +1,5 @@
 {% set name = "qtwebsockets" %}
-{% set version = "6.9.2" %}
+{% set version = "6.10.1" %}
 
 package:
   name: {{ name }}
@@ -7,11 +7,11 @@ package:
 
 source:
   - url: https://download.qt.io/official_releases/qt/{{ version.rpartition('.')[0] }}/{{ version }}/submodules/{{ name }}-everywhere-src-{{ version }}.tar.xz
-    sha256: be833f667ed8d6c2f41c0b9d1f8addf20b8d2b11c3a9466ec6d70c62121708ee
+    sha256: 272ac7e94418e2b13b3384d73ba89dbd6b746d7661b44dce906f8bfc0795bd01
     folder: {{ name }}
 
 build:
-  number: 1
+  number: 0
   # https://doc.qt.io/qt-6/qt-releases.html#binary-compatibility
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
@@ -41,7 +41,7 @@ test:
     - {{ stdlib('c') }}  # [linux]
     - {{ compiler('cxx') }}
     - cmake
-    - ninja
+    - ninja-base
     - qtbase-devel
   files:
     - run_qt_test.sh    # [unix]
