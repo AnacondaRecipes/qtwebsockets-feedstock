@@ -43,6 +43,7 @@ test:
     - cmake
     - ninja-base
     - qtbase-devel
+    - zstd  # [osx]
   files:
     - run_qt_test.sh    # [unix]
     - run_qt_test.bat   # [win]
