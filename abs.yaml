@@ -5,4 +5,4 @@ channels:
   - https://staging.continuum.io/pbp/fs/qtbase-feedstock/pr22/f9b7216
   - https://staging.continuum.io/pbp/fs/qtshadertools-feedstock/pr9/e64e5f3
   - https://staging.continuum.io/pbp/fs/qtsvg-feedstock/pr9/fb94a22
-  - https://staging.continuum.io/pbp/fs/qtdeclarative-feedstock/pr9/8aadcd5
+  - https://staging.continuum.io/pbp/fs/qtdeclarative-feedstock/pr9/6d0b18c
